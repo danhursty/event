@@ -1,0 +1,1 @@
+{"version":3,"file":"react-query.d.ts","sourceRoot":"","sources":["../../src/types/react-query.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,uBAAuB,CAAA;AACtD,OAAO,KAAK,EAAE,QAAQ,EAAE,MAAM,mBAAmB,CAAA;AAGjD,MAAM,MAAM,aAAa,GAAG;IAC1B,QAAQ,EAAE,cAAc,CAAC,QAAQ,CAAC,CAAA;CACnC,CAAA;AAED,MAAM,MAAM,iBAAiB,GAAG;IAC9B,OAAO,CAAC,EAAE,OAAO,CAAA;CAClB,CAAA"}
