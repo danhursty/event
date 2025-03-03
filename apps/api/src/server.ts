@@ -1,29 +1,33 @@
+import { serve } from "@hono/node-server";
 import { app } from "./app";
+import * as Sentry from "@sentry/node";
+import { ProfilingIntegration } from "@sentry/profiling-node";
 
-const PORT = process.env.PORT || 3001;
+// Initialize Sentry
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  integrations: [new ProfilingIntegration()],
+  tracesSampleRate: 1.0,
+  profilesSampleRate: 1.0,
+});
 
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+const port = process.env.PORT || 3001;
+
+console.log(`Server is starting on port ${port}...`);
+
+const server = serve({
+  fetch: app.fetch,
+  port: Number(port),
 });
 
 // Graceful shutdown
-function cleanup() {
-  console.log("Shutting down server...");
-
-  // Add timeout to force shutdown if graceful shutdown fails
-  const forceShutdown = setTimeout(() => {
-    console.error(
-      "Could not close connections in time, forcefully shutting down"
-    );
-    process.exit(1);
-  }, 10000);
-
+const shutdown = () => {
+  console.log("Shutting down gracefully...");
   server.close(() => {
-    console.log("Server closed successfully");
-    clearTimeout(forceShutdown);
+    console.log("Server closed");
     process.exit(0);
   });
-}
+};
 
-process.on("SIGTERM", cleanup);
-process.on("SIGINT", cleanup);
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);

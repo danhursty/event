@@ -9,23 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
   Team,
   Permission,
   RoleMember,
   OrganizationMember,
   TeamMember,
 } from "@repo/supabase";
-import { withRoleCheck } from "@/features/authorization/components/withRoleCheck";
+import { withRoleCheck } from "@/features/authorization/hooks/withRoleCheck";
 import { useDeleteTeam, useUpdateTeam } from "@repo/supabase";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
@@ -76,6 +66,11 @@ export function WorkspaceCard({
   const canManageWorkspace = checkAccess({
     requiredPermissions: ["manage_organization" as Permission],
   });
+
+  // Add debugging for settings button visibility
+  console.log("Team name:", team.name);
+  console.log("Can manage workspace:", canManageWorkspace);
+  console.log("Current member permissions:", currentMember?.role?.permissions);
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this workspace?")) {
@@ -171,7 +166,7 @@ export function WorkspaceCard({
                   setIsSettingsOpen(true);
                 }}
                 disabled={disabled}
-                data-testid="edit-button"
+                data-testid="settings-button"
               >
                 <Settings className="h-4 w-4" />
                 <span className="ml-2">Settings</span>

@@ -1,4 +1,4 @@
-import { Tables } from "@/types/types";
+import { Tables } from "@repo/supabase";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

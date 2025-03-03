@@ -11,6 +11,16 @@ interface WorkspacesPageProps {
   };
 }
 
+async function getOrganizationName(orgId: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("organizations")
+    .select("name")
+    .eq("id", orgId)
+    .single();
+  return data?.name || "";
+}
+
 export default async function WorkspacesPage({ params }: WorkspacesPageProps) {
   if (!params || !params.orgId) {
     return <div>No organization provided.</div>;
@@ -29,11 +39,13 @@ export default async function WorkspacesPage({ params }: WorkspacesPageProps) {
   });
 
   const dehydratedState = dehydrate(queryClient);
+  const organizationName = await getOrganizationName(params.orgId);
   return (
     <WorkspacesContent
       orgId={params.orgId}
       user={user}
       state={dehydratedState}
+      organizationName={organizationName}
     />
   );
 }

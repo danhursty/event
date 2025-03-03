@@ -79,7 +79,7 @@ describe("WorkspaceCard", () => {
         <WorkspaceCard team={mockTeam} currentMember={mockAdminMember} />
       );
 
-      expect(screen.getByTestId("edit-button")).toBeInTheDocument();
+      expect(screen.getByTestId("settings-button")).toBeInTheDocument();
       expect(screen.getByTestId("delete-button")).toBeInTheDocument();
     });
 
@@ -88,8 +88,8 @@ describe("WorkspaceCard", () => {
         <WorkspaceCard team={mockTeam} currentMember={mockAdminMember} />
       );
 
-      const editButton = screen.getByTestId("edit-button");
-      fireEvent.click(editButton, { stopPropagation: true });
+      const settingsButton = screen.getByTestId("settings-button");
+      fireEvent.click(settingsButton, { stopPropagation: true });
 
       // Settings modal is rendered by WorkspaceSettings component
       // We don't need to test its internals here

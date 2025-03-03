@@ -1,27 +1,22 @@
 import winston from "winston";
+import { getAppConfig } from "./app-config";
 
-import { config } from "./app-config";
+const config = getAppConfig();
 
-const { combine, timestamp, printf } = winston.format;
-
-interface LogInfo {
-  level: string;
-  message: string;
-  timestamp: string;
-  [key: string]: unknown;
-}
-
-const logFormat = printf((info: unknown) => {
-  const { level, message, timestamp } = info as LogInfo;
-  return `[api][${timestamp}] ${level}: ${message}`;
-});
-
-export const logger = winston.createLogger({
-  level: config.NODE_ENV === "development" ? "debug" : "info",
-  format: combine(timestamp(), logFormat),
+const logger = winston.createLogger({
+  level: config.LOG_LEVEL || "info",
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.json()
+  ),
   transports: [
     new winston.transports.Console({
-      stderrLevels: ["error"],
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      ),
     }),
   ],
 });
+
+export { logger };

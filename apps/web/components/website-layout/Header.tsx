@@ -20,7 +20,7 @@ interface HeaderProps {
 
 export default function Header({
   hidePricing = false,
-  hideFAQ = false,
+  hideFAQ = true,
 }: HeaderProps) {
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

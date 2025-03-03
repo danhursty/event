@@ -43,7 +43,7 @@ export class BillingService {
 
     const { data: organization, error: orgError } = await this.supabase
       .from("organizations")
-      .select("organization_id")
+      .select("id")
       .eq("stripe_customer_id", customerId)
       .single();
 
@@ -56,7 +56,7 @@ export class BillingService {
       .update({
         is_subscribed: true,
       })
-      .eq("organization_id", organization.organization_id);
+      .eq("id", organization.id);
 
     if (error) {
       throw new Error(
@@ -70,7 +70,7 @@ export class BillingService {
 
     const { data: organization, error: orgError } = await this.supabase
       .from("organizations")
-      .select("organization_id")
+      .select("id")
       .eq("stripe_customer_id", customerId)
       .single();
 
@@ -85,7 +85,7 @@ export class BillingService {
       .update({
         is_subscribed: isActive,
       })
-      .eq("organization_id", organization.organization_id);
+      .eq("id", organization.id);
 
     if (error) {
       throw new Error(
@@ -99,7 +99,7 @@ export class BillingService {
 
     const { data: organization, error: orgError } = await this.supabase
       .from("organizations")
-      .select("organization_id")
+      .select("id")
       .eq("stripe_customer_id", customerId)
       .single();
 
@@ -112,7 +112,7 @@ export class BillingService {
       .update({
         is_subscribed: false,
       })
-      .eq("organization_id", organization.organization_id);
+      .eq("id", organization.id);
 
     if (error) {
       throw new Error(

@@ -5,12 +5,13 @@ import {
   createTestMembers,
 } from "@repo/supabase";
 import { createAuthenticatedClient } from "../test-utils";
+import { User } from "@supabase/supabase-js";
 
 describe("Organization Members RLS Policies", () => {
   // We'll create these in beforeAll and use them throughout the tests
-  let adminUser: { user: { id: string; email: string }; token: string };
-  let memberUser: { user: { id: string; email: string }; token: string };
-  let nonMemberUser: { user: { id: string; email: string }; token: string };
+  let adminUser: { user: User; token: string };
+  let memberUser: { user: User; token: string };
+  let nonMemberUser: { user: User; token: string };
   let organizationId: string;
   let teamId: string;
   let roles: { admin: { id: string }; member: { id: string } };
@@ -19,9 +20,9 @@ describe("Organization Members RLS Policies", () => {
   beforeAll(async () => {
     // Create test users
     [adminUser, memberUser, nonMemberUser] = await Promise.all([
-      createTestUser({}),
-      createTestUser({}),
-      createTestUser({}),
+      createTestUser(),
+      createTestUser(),
+      createTestUser(),
     ]);
 
     // Create organization with admin user
@@ -77,6 +78,7 @@ describe("Organization Members RLS Policies", () => {
       .select("*")
       .eq("organization_id", organizationId);
 
+    // Verify non-member can't see organization members due to RLS
     expect(data).toHaveLength(0); // Should not see any members
     expect(error).toBeNull(); // No error, just empty result due to RLS
   });

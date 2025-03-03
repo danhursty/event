@@ -1,12 +1,15 @@
 import { beforeAll, afterAll, afterEach } from "vitest";
+import { serve } from "@hono/node-server";
 import { app } from "../app";
-import type { Server } from "http";
 
-let server: Server;
+let server: ReturnType<typeof serve>;
 
 beforeAll(() => {
-  const PORT = process.env.TEST_PORT || 3002;
-  server = app.listen(PORT);
+  const port = process.env.TEST_PORT || 3002;
+  server = serve({
+    fetch: app.fetch,
+    port: Number(port),
+  });
 });
 
 afterAll(() => {

@@ -48,4 +48,11 @@ CREATE POLICY "team_members_delete" ON public.team_members
         (SELECT organization_id FROM teams WHERE id = team_id),
         'manage_organization'::permission_action
       )
-    ); 
+    );
+
+-- Create policy for service role to have full access to team_members
+CREATE POLICY "team_members_service_role" ON public.team_members
+    FOR ALL
+    TO service_role
+    USING (true)
+    WITH CHECK (true); 

@@ -6,6 +6,7 @@ export * from "./errors";
 
 // Client Type Definition
 export type SupabaseClient = ReturnType<typeof createClient<Database>>;
+
 // Role and Permission Types
 export type {
   Role,

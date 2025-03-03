@@ -1,54 +1,40 @@
-import { Router } from "express";
+import { OpenAPIHono } from "@hono/zod-openapi";
+import { z } from "@hono/zod-openapi";
+import type { Context } from "hono";
 
-const healthRouter = Router();
+const healthResponseSchema = z
+  .object({
+    status: z.string().openapi({
+      example: "ok",
+    }),
+    timestamp: z.string().openapi({
+      example: new Date().toISOString(),
+    }),
+  })
+  .openapi("HealthResponse");
 
-/**
- * @openapi
- * /health:
- *   get:
- *     tags:
- *       - Health
- *     summary: Check API health status
- *     description: Returns the current health status of the API and server timestamp
- *     responses:
- *       200:
- *         description: API is healthy
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: ok
- *                   description: The health status of the API
- *                 timestamp:
- *                   type: string
- *                   format: date-time
- *                   example: "2024-01-16T12:00:00.000Z"
- *                   description: The current server timestamp
- *       500:
- *         description: Internal server error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: object
- *                   properties:
- *                     message:
- *                       type: string
- *                       example: Internal Server Error
- *                     code:
- *                       type: string
- *                       example: INTERNAL_SERVER_ERROR
- */
-healthRouter.get("/", (_, res) => {
-  res.status(200).json({
+const route = {
+  method: "get",
+  path: "/",
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: healthResponseSchema,
+        },
+      },
+      description: "Health check response",
+    },
+  },
+} as const;
+
+const app = new OpenAPIHono();
+
+app.openapi(route, (c: Context) => {
+  return c.json({
     status: "ok",
     timestamp: new Date().toISOString(),
   });
 });
 
-export { healthRouter };
+export { app as healthRoutes };

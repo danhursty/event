@@ -39,13 +39,21 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
 
-# Copy necessary files
+# Copy necessary files and dependencies
 COPY --from=builder /app/apps/api/dist ./dist
-COPY --from=builder /app/apps/api/package.json ./
+COPY --from=builder /app/apps/api/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/packages ./packages
+
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 hono && \
+    chown -R hono:nodejs /app
+
+USER hono
 
 # Expose the port
 EXPOSE 8080
 
 # Start the server
-CMD ["node", "dist/app.js"] 
+CMD ["node", "dist/server.js"] 

@@ -8,7 +8,7 @@
     "clean": "rm -rf .next",
     "dev": "NODE_NO_WARNINGS=1 next dev",
     "build": "next build",
-    "postbuild": "next-sitemap",
+    "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "start": "NODE_NO_WARNINGS=1 next start",
     "lint": "next lint --max-warnings 0",
     "check-types": "tsc --noEmit",

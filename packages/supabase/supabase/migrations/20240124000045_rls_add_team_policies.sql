@@ -31,4 +31,11 @@ CREATE POLICY "teams_delete" ON public.teams
     FOR DELETE TO authenticated
     USING (
       has_org_permission(organization_id, 'manage_organization'::permission_action)
-    ); 
+    );
+
+-- Create policy for service role to have full access to teams
+CREATE POLICY "teams_service_role" ON public.teams
+    FOR ALL
+    TO service_role
+    USING (true)
+    WITH CHECK (true); 

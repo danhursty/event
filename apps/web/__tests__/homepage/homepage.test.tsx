@@ -87,6 +87,8 @@ vi.mock("lucide-react", () => ({
   ChevronDown: () => <div>ChevronDown Icon</div>,
   Menu: () => <div>Menu Icon</div>,
   Moon: () => <div>Moon Icon</div>,
+  XCircle: () => <div>XCircle Icon</div>,
+  CheckCircle: () => <div>CheckCircle Icon</div>,
 }));
 
 // Mock next/image

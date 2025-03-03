@@ -7,9 +7,9 @@ import { getUsers } from "@repo/supabase";
 export default async function DashboardPage({
   params,
 }: {
-  params: {
+  params: Promise<{
     orgId: string;
-  };
+  }>;
 }) {
   const queryClient = createQueryClient();
   const { orgId } = await params;

@@ -1,5 +1,5 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import { Database } from "../../../../packages/supabase/src";
+import { Database } from "@repo/supabase";
 
 // Move environment variable validation to runtime
 const getRequiredEnvVar = (name: string): string => {

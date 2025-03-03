@@ -4,12 +4,10 @@ import { createClient } from "@/utils/supabase/client";
 import { useTeams } from "@repo/supabase";
 import { DehydratedState, HydrationBoundary } from "@tanstack/react-query";
 import { useWorkspaceMember } from "@/features/authorization/hooks/use-workspace-member";
-import { useRoleCheck } from "@/features/authorization/hooks/use-role-check";
 import { User } from "@supabase/supabase-js";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { WorkspaceGrid } from "./WorkspaceGrid/WorkspaceGrid";
-import { useRouter } from "next/navigation";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -17,11 +15,13 @@ interface WorkspacesContentProps {
   orgId: string;
   user: User;
   state: DehydratedState;
+  organizationName: string;
 }
 
 function WorkspacesContentInner({
   orgId,
   user,
+  organizationName,
 }: Omit<WorkspacesContentProps, "state">) {
   const supabase = createClient();
   const { member, isLoading: isLoadingMember } = useWorkspaceMember({
@@ -29,13 +29,6 @@ function WorkspacesContentInner({
     orgId,
     supabase,
   });
-  const router = useRouter();
-
-  const { checkAccess } = useRoleCheck(member || null);
-  const canCreateWorkspace = checkAccess({
-    requiredPermissions: ["manage_organization"],
-  });
-
   const {
     data: workspaces = [],
     refetch,
@@ -53,13 +46,13 @@ function WorkspacesContentInner({
     return <LoadingFallback />;
   }
 
-  // Redirect if no member or no workspaces
-  if (!member || workspaces.length === 0) {
-    router.push("/org"); // Redirect to organizations page
-  }
-
   return (
     <div className="grid gap-6 p-6">
+      {organizationName && (
+        <h1 data-testid="org-name" className="text-2xl font-bold">
+          {organizationName}
+        </h1>
+      )}
       <WorkspaceGrid
         teams={workspaces}
         currentMember={member!}
@@ -93,12 +86,17 @@ export function WorkspacesContent({
   orgId,
   user,
   state,
+  organizationName,
 }: WorkspacesContentProps) {
   return (
     <HydrationBoundary state={state}>
       <ErrorBoundary fallback={<div>Error loading workspaces</div>}>
         <Suspense fallback={<LoadingFallback />}>
-          <WorkspacesContentInner orgId={orgId} user={user} />
+          <WorkspacesContentInner
+            orgId={orgId}
+            user={user}
+            organizationName={organizationName}
+          />
         </Suspense>
       </ErrorBoundary>
     </HydrationBoundary>

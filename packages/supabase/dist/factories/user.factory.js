@@ -3,12 +3,14 @@ import { createAdminClient } from "./utils";
 /**
  * Creates a single user with authentication.
  *
- * @param {object} params - The parameters for creating a user
+ * @param {object} [params] - The parameters for creating a user (optional)
  * @param {string} [params.email] - Optional email (will be generated if not provided)
  * @param {string} [params.password] - Optional password (defaults to 'password123')
- * @returns {Promise<{ user: { id: string; email: string }, token: string }>} The created user and auth token
+ * @returns {Promise<{ user: User, token: string }>} The created user and auth token
  */
-export async function createTestUser({ email = faker.internet.email(), password = "password123", }) {
+export async function createTestUser(params) {
+    const email = params?.email ?? faker.internet.email();
+    const password = params?.password ?? "password123";
     const adminClient = createAdminClient();
     const { data: authData, error: authError } = await adminClient.auth.signUp({
         email,
@@ -26,12 +28,13 @@ export async function createTestUser({ email = faker.internet.email(), password 
 /**
  * Creates multiple users with authentication.
  *
- * @param {object} params - The parameters for creating users
- * @param {number} params.count - Number of users to create
- * @returns {Promise<Array<{ user: { id: string; email: string }, token: string }>>} Array of created users and their auth tokens
+ * @param {object} [params] - The parameters for creating users (optional)
+ * @param {number} [params.count=1] - Number of users to create (defaults to 1)
+ * @returns {Promise<Array<{ user: User, token: string }>>} Array of created users and their auth tokens
  */
-export async function createTestUsers({ count }) {
-    return Promise.all(Array.from({ length: count }, () => createTestUser({})));
+export async function createTestUsers(params) {
+    const count = params?.count ?? 1;
+    return Promise.all(Array.from({ length: count }, () => createTestUser()));
 }
 /**
  * Logs in a user.

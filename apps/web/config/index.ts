@@ -26,7 +26,7 @@ export const config: AppConfig = {
   name: "RiseLoop",
   domainName: "riseloop.ai",
   appDescription:
-    "Automate your social media growth with AI-powered content creation and scheduling",
+    "Transform social media management with AI-powered inbox and intelligent video content strategies",
   company: {
     name: "RiseLoop",
     address: "",
@@ -94,81 +94,82 @@ export const config: AppConfig = {
   },
   homepage: {
     numberOfMakersShipped: 50,
-    heroTitle: "Automate Your Social Media Growth",
+    heroTitle: "Social Media Management Made Effortless",
     heroSubtitle:
-      "Create, schedule, and analyze your social media content with AI-powered automation.",
+      "Streamline your social media interactions with AI-powered commenting and generate data-driven content strategies from video analysis.",
     usps: [
       {
-        title: "AI Content Creation",
+        title: "AI-Powered Inbox",
         description:
-          "Generate engaging social media content tailored to your brand voice.",
-        icon: Clock,
+          "Manage all your social accounts from a unified inbox with intelligent comment automation.",
+        icon: Inbox,
       },
       {
-        title: "Smart Analytics",
+        title: "Video-Based Content Strategies",
         description:
-          "Track performance and engagement across all your social platforms.",
+          "Analyze 500+ competitor videos to generate actionable content strategies for your brand.",
         icon: BarChart,
       },
       {
-        title: "Automated Scheduling",
-        description: "Schedule posts at optimal times for maximum engagement.",
-        icon: Search,
+        title: "Team Collaboration",
+        description:
+          "Seamlessly work with internal teams and clients through shared workspaces.",
+        icon: Users,
       },
     ],
     painPointsSection: {
-      title: "Transform Your Social Media Strategy",
+      title: "Revolutionize Your Social Media Management",
       withoutProduct: {
         points: [
-          "Manual content creation",
-          "Inconsistent posting",
-          "Time-consuming scheduling",
-          "Scattered analytics",
-          "Limited growth",
+          "Overwhelmed by managing multiple social accounts",
+          "Hours wasted watching competitor videos for ideas",
+          "Missed engagement opportunities",
+          "Inconsistent community management",
+          "Struggle to stay on top of comments and messages",
         ],
       },
       withProduct: {
         points: [
-          "AI-powered content creation",
-          "Consistent brand presence",
-          "Automated scheduling",
-          "Unified analytics dashboard",
-          "Accelerated growth",
+          "Unified inbox for all social platforms",
+          "AI-generated content strategies from video analysis",
+          "Automated comment management",
+          "Consistent brand engagement",
+          "Never miss important interactions",
         ],
       },
     },
     featuresSection: {
-      title: "Powerful Features",
+      title: "Powerful Tools for Modern Social Media Teams",
       useTabLayout: true,
-      description: "Everything you need to automate your social media growth",
+      description: "Everything you need to excel at social media management",
       features: [
         {
-          title: "AI Content Creation",
+          title: "Unified Social Inbox",
           description:
-            "Generate engaging social media content with our AI engine. Create posts that resonate with your audience while maintaining your brand voice.",
-          image: "/features/ai-content.png",
+            "Manage comments and messages from all your social accounts in one place. Prioritize, filter, and respond to interactions efficiently.",
+          image: "/features/inbox.png",
+          icon: Inbox,
+        },
+        {
+          title: "AI Comment Management",
+          description:
+            "Let AI handle routine comments and flag important ones for your attention. Set up automated responses that match your brand voice.",
+          image: "/features/ai-commenting.png",
           icon: Search,
         },
         {
-          title: "Smart Analytics",
+          title: "Video Content Analysis",
           description:
-            "Track your social media performance across all platforms. Get insights into engagement, reach, and growth trends.",
-          image: "/features/analytics.png",
+            "Our AI analyzes 500+ videos from your competitors and industry to generate data-driven content strategies unique to your brand.",
+          image: "/features/video-analysis.png",
           icon: BarChart,
         },
         {
-          title: "Automated Scheduling",
+          title: "Team Collaboration",
           description:
-            "Schedule your posts at optimal times for maximum engagement. Our AI determines the best posting times for your audience.",
-          image: "/features/scheduling.png",
-          icon: Server,
-        },
-        {
-          title: "Multi-Platform Management",
-          description:
-            "Manage all your social media accounts from one dashboard. Create, schedule, and analyze content across platforms.",
-          image: "/features/multi-platform.png",
-          icon: Clock,
+            "Work seamlessly with your team and clients through shared workspaces. Assign tasks, share insights, and maintain brand consistency.",
+          image: "/features/team-collab.png",
+          icon: Users,
         },
       ],
     },
@@ -178,69 +179,69 @@ export const config: AppConfig = {
         name: "Sarah Johnson",
         company: "Social Media Manager",
         quote:
-          "RiseLoop has transformed how I manage social media. The AI content creation and scheduling features save me hours every week.",
+          "RiseLoop's AI comment management has transformed our workflow. We're responding faster and maintaining better relationships with our audience.",
       },
       {
         imageId: 2,
         name: "Michael Chen",
         company: "Digital Marketing Agency",
         quote:
-          "The automated scheduling and analytics have helped us scale our social media management services significantly.",
+          "The video analysis feature gave us insights we would have missed. Our content strategy is now data-driven and much more effective.",
       },
       {
         imageId: 3,
         name: "Emily Rodriguez",
         company: "Tech Startup",
         quote:
-          "RiseLoop's AI content creation is a game-changer. We're posting more consistently and seeing better engagement.",
+          "Managing multiple social accounts was a nightmare before RiseLoop. Now our entire team stays on the same page with the unified inbox.",
       },
     ],
     faqs: [
       {
-        question: "How does RiseLoop's AI content creation work?",
+        question: "How does RiseLoop's AI comment management work?",
         answer:
-          "Our AI analyzes your brand voice, target audience, and industry trends to generate engaging social media content. You can customize and refine the generated content before posting.",
+          "Our AI analyzes incoming comments across your social platforms, categorizes them by sentiment and intent, and can automatically respond to routine inquiries while flagging important ones for your attention. You can customize response templates and train the AI on your brand voice.",
       },
       {
         question: "Which social media platforms do you support?",
         answer:
-          "We currently support Twitter, LinkedIn, and Instagram, with more platforms coming soon. You can manage all your accounts from a single dashboard.",
+          "We currently support Facebook, Instagram, and TikTok, with more platforms coming soon. You can manage all your accounts from a single unified inbox.",
       },
       {
-        question: "How does the automated scheduling work?",
+        question: "How does the video content analysis work?",
         answer:
-          "Our AI analyzes your audience's engagement patterns to determine optimal posting times. You can schedule content in advance, and our system will automatically post at the best times.",
+          "Our AI downloads and analyzes up to 500 videos from your competitors and industry leaders. It identifies trends, engagement patterns, content themes, and optimal formats, then generates actionable content strategies tailored to your brand and audience.",
       },
       {
-        question: "What kind of analytics do you provide?",
+        question: "How long does it take to analyze 500 videos?",
         answer:
-          "We provide comprehensive analytics including engagement rates, reach, follower growth, and content performance metrics across all your connected platforms.",
-      },
-      {
-        question: "How often can I generate content?",
-        answer:
-          "Your content generation limit depends on your plan. Each plan comes with a monthly quota of AI-generated posts, and you can purchase additional credits as needed.",
-      },
-      {
-        question: "How does the credit system work?",
-        answer:
-          "Credits are used for AI content generation and scheduling. The system automatically recharges when credits fall below £10, adding £50 worth of credits to ensure uninterrupted service.",
+          "The initial analysis takes 24-48 hours, depending on the complexity of your industry and the specific accounts being analyzed. After the initial analysis, our system provides regular updates based on new content.",
       },
       {
         question: "Can I manage multiple brands or clients?",
         answer:
-          "Yes, our platform supports organization and team management, allowing you to manage multiple brands or clients under a single account.",
+          "Yes, our platform supports organization and team management, allowing you to manage multiple brands or clients under a single account with customized permissions and workspaces.",
       },
       {
-        question: "How do you ensure content quality?",
+        question: "How do you ensure the quality of AI responses?",
         answer:
-          "Our AI is trained on successful social media content and follows your brand guidelines. You can always review and edit generated content before posting.",
+          "Our AI is trained on successful social media interactions and follows your brand guidelines. You can review all automated responses, set up approval workflows for specific scenarios, and continuously train the system through feedback.",
+      },
+      {
+        question: "Do you offer moderation features?",
+        answer:
+          "Yes, our platform includes advanced moderation tools to automatically hide or flag inappropriate comments, spam, and negative sentiment. You can customize moderation rules based on your specific needs.",
+      },
+      {
+        question: "How do team permissions work?",
+        answer:
+          "You can assign different roles and permissions to team members and clients, controlling access to specific features, accounts, and actions. This ensures everyone has the access they need while maintaining security.",
       },
     ],
     ctaSection: {
-      title: "Ready to Automate Your Social Media Growth?",
+      title: "Ready to Transform Your Social Media Management?",
       description:
-        "Start creating and scheduling AI-powered content today with RiseLoop.",
+        "Start managing your social accounts more efficiently with AI-powered tools.",
       ctaText: "Get Started",
       ctaLink: "/login",
     },
@@ -258,14 +259,24 @@ export const config: AppConfig = {
         icon: Server,
       },
       {
-        title: "Inbox",
+        title: "Social Inbox",
         href: "[teamId]/inbox",
         icon: Inbox,
+      },
+      {
+        title: "Video Analysis",
+        href: "[teamId]/video-analysis",
+        icon: BarChart,
       },
       {
         title: "Social Accounts",
         href: "[teamId]/social-accounts",
         icon: Users,
+      },
+      {
+        title: "Settings",
+        href: "[teamId]/settings",
+        icon: Home,
       },
     ],
   },

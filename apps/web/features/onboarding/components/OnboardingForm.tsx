@@ -26,7 +26,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import toast from "react-hot-toast";
 import { Loader2, Check } from "lucide-react";
-import { DatabaseFunctions } from "../../../../../packages/supabase/src";
+import { DatabaseFunctions } from "@repo/supabase";
 import { createClient } from "@/utils/supabase/client";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";

@@ -1,4 +1,4 @@
-import { Tables } from "@/types/types";
+import { Tables } from "@repo/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 

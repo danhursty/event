@@ -1,6 +1,7 @@
 ---
 description: When you are building new react components, or react pages.
 globs: 
+alwaysApply: false
 ---
 
 # TDD Approach
@@ -22,6 +23,12 @@ Database types:
 We have factories that are in the [index.ts](mdc:packages/supabase/src/factories/index.ts), i.e. [member.factory.ts](mdc:packages/supabase/src/factories/member.factory.ts) or [role.factory.ts](mdc:packages/supabase/src/factories/role.factory.ts) or [user.factory.ts](mdc:packages/supabase/src/factories/user.factory.ts)
 You can create new factories, if they are missing.
 One recommendation is to try using the module folder first CRUD rather than replicating that CRUD, the only reason why we did this for organisations and org_members and team_members is because we had a custom sign up. But just assume you can re-use the CRUD.
+
+Core Philosophy
+- Ask if the code requires roles or not.
+- Handle all happy critical paths first.
+- Handle all edge cases.
+- Write CRUD tests for RLS (regardless of whether or not roles will be utilized)
 
 There are a couple of scenarios so far:
 - Client/Team

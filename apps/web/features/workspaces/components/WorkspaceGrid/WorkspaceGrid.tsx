@@ -2,7 +2,7 @@
 
 import { Team, TeamMember, Permission } from "@repo/supabase";
 import { WorkspaceCard } from "../WorkspaceCard/WorkspaceCard";
-import { withRoleCheck } from "@/features/authorization/components/withRoleCheck";
+import { withRoleCheck } from "@/features/authorization/hooks/withRoleCheck";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import {
@@ -44,6 +44,11 @@ export function WorkspaceGrid({
     name: "",
     website: "",
   });
+
+  // Explicitly check for the manage_organization permission
+  const hasManageOrgPermission = currentMember?.role?.permissions?.some(
+    (p) => p?.permission?.action === "manage_organization"
+  );
 
   const handleCreateWorkspace = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,6 +97,7 @@ export function WorkspaceGrid({
             <CreateWorkspaceButton
               currentMember={currentMember}
               variant="default"
+              data-testid="create-workspace-button"
             >
               <Plus className="h-4 w-4 mr-2" />
               Create Workspace

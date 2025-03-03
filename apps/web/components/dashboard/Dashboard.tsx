@@ -26,6 +26,11 @@ function DashboardSkeleton() {
 function DashboardContent() {
   const supabase = createClient();
   const { data } = useUsers({ supabase });
+
+  if (!data) {
+    return <DashboardSkeleton />;
+  }
+
   return (
     <>
       {data.map((user) => (

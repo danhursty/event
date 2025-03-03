@@ -16,7 +16,7 @@
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-hot-toast": "^2.5.1",
-    "supabase": "^2.12.1",
+    "supabase": "^2.15.8",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
@@ -68,5 +68,6 @@
     "validate": "pnpm run lint && pnpm run test:types && pnpm run format:check"
   },
   "types": "./dist/index.d.ts",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "type": "module"
 }

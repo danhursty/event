@@ -1,9 +1,14 @@
-# 🧙‍♂️ RiseLoop - Modern SaaS Boilerplate.
+# 🧙‍♂️ RiseLoop - Modern SaaS Boilerplate
 
 A powerful, type-safe SaaS boilerplate built with Next.js 15, React, TypeScript, and Supabase. This monorepo is structured using Turborepo and PNPM for optimal development experience and performance.
 
+Useful commands:
+
+- `git ls-files | xargs wc -l` - This is particularly useful when you want to get a quick overview of the size of your codebase in terms of lines of code.
+
 ## Inspiration:
 
+- https://github.com/alan2207/bulletproof-react
 - https://usebasejump.com/blog/testing-on-supabase-with-pgtap#testing-authenticated
 - https://github.com/dougwithseismic/turbo-2025/ (Doug is really great and knows his stuff).
 
@@ -19,7 +24,12 @@ A powerful, type-safe SaaS boilerplate built with Next.js 15, React, TypeScript,
 │   │   ├── integration/    # Integration tests
 │   │   ├── e2e/           # End-to-end tests
 │   │   └── __tests__/     # Unit tests
-│   └── api/                # Backend API (if applicable)
+│   └── api/                # Backend API with Hono.dev
+│       ├── src/            # Source code
+│       │   ├── routes/     # API routes with OpenAPI/Swagger docs
+│       │   ├── middleware/ # Hono middleware
+│       │   └── test/       # API tests
+│       └── swagger/        # Auto-generated OpenAPI documentation
 ├── packages/
 │   ├── supabase/          # Supabase configuration and migrations
 │   ├── typescript-config/  # Shared TypeScript configurations
@@ -49,6 +59,7 @@ pnpm install
 
 ```bash
 cp apps/web/.env.example apps/web/.env.local
+cp apps/api/.env.example apps/api/.env
 ```
 
 3. Start the Supabase local stack:
@@ -58,10 +69,67 @@ cd packages/supabase
 supabase start
 ```
 
-4. Start the development server:
+4. Start the development servers:
 
 ```bash
 pnpm dev
+```
+
+### API Documentation
+
+The API is built with [Hono](https://hono.dev), a modern, lightweight, and type-safe web framework. We use OpenAPI/Swagger for API documentation with automatic type generation from Zod schemas.
+
+To access the API documentation:
+
+1. Start the API server in development mode:
+
+```bash
+cd apps/api
+pnpm dev
+```
+
+2. Access the documentation:
+
+- OpenAPI JSON: http://localhost:8080/api-docs
+- Swagger UI: http://localhost:8080/swagger
+
+The API documentation is automatically generated from our route definitions and Zod schemas, ensuring it's always up-to-date with the actual implementation.
+
+Example of a documented API route:
+
+```typescript
+import { OpenAPIHono } from "@hono/zod-openapi";
+import { z } from "@hono/zod-openapi";
+
+const userSchema = z
+  .object({
+    id: z.string().openapi({
+      example: "123",
+    }),
+    name: z.string().openapi({
+      example: "John Doe",
+    }),
+  })
+  .openapi("User");
+
+const route = {
+  method: "get",
+  path: "/users/{id}",
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: userSchema,
+        },
+      },
+      description: "User details",
+    },
+  },
+};
+
+app.openapi(route, (c) => {
+  // Implementation
+});
 ```
 
 ## 🧪 Testing Strategy
@@ -81,9 +149,9 @@ describe("Organization RLS Policies", () => {
   it("should enforce member-only access", async () => {
     // 1. Create test users with tokens
     const [adminUser, memberUser, nonMemberUser] = await Promise.all([
-      createTestUser({}),
-      createTestUser({}),
-      createTestUser({}),
+      createTestUser(),
+      createTestUser(),
+      createTestUser(),
     ]);
 
     // 2. Create an organization with admin
@@ -151,7 +219,7 @@ describe("Organization RLS Policies", () => {
    }));
 
    it("should handle server operations", async () => {
-     const { token } = await createTestUser({});
+     const { token } = await createTestUser();
      const client = createAuthenticatedClient(token);
 
      // Mock the server client to use our authenticated client
@@ -254,7 +322,6 @@ Located in `apps/web/utils/supabase/`.
 
 - **Progress Tracking**: Daily progress is documented in `_project_progress/`
 - **Learning Resources**: Patterns and best practices in `_learnings/`
-- **API Documentation**: Available in `docs/`
 
 ## 🔍 Key Features
 

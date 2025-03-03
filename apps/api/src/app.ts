@@ -1,41 +1,36 @@
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
-import type { RequestHandler } from "express";
-import swaggerUi from "swagger-ui-express";
-import { requestLogger } from "./middleware/request-logger";
-import { handleErrors } from "./middleware/handle-errors";
-import { healthRouter } from "./routes/health";
-import { swaggerSpec } from "./config/swagger";
+import { OpenAPIHono } from "@hono/zod-openapi";
+import { swaggerUI } from "@hono/swagger-ui";
+import { logger } from "./middleware/logger";
+import { errorHandler } from "./middleware/error-handler";
+import { cors } from "hono/cors";
+import { secureHeaders } from "hono/secure-headers";
+import { healthRoutes } from "./routes/health";
+import type { Env } from "./types/env";
 
-// Initialize express app
-const app = express();
+// Initialize Hono app with OpenAPI support
+const app = new OpenAPIHono<{ Bindings: Env }>();
 
 // Basic middleware
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Request logging
-app.use(requestLogger);
+app.use("*", secureHeaders());
+app.use("*", cors());
+app.use("*", logger());
+app.use("*", errorHandler());
 
 // API Documentation
 if (process.env.NODE_ENV !== "production") {
-  const swaggerMiddleware = [
-    ...swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec, {
-      explorer: true,
-    }),
-  ] as RequestHandler[];
+  app.doc("/api-docs", {
+    openapi: "3.0.0",
+    info: {
+      title: "RiseLoop API",
+      version: "1.0.0",
+      description: "API documentation for RiseLoop",
+    },
+  });
 
-  app.use("/api-docs", swaggerMiddleware);
+  app.get("/swagger", swaggerUI({ url: "/api-docs" }));
 }
 
-// Routes
-app.use("/health", healthRouter);
-
-// Error handling
-app.use(handleErrors);
+// Mount routes
+app.route("/health", healthRoutes);
 
 export { app };

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tables } from "@/types/types";
+import { Tables } from "@repo/supabase";
 import AnimatedBlogCardWrapper from "./AnimatedBlogCardWrapper";
 
 interface AnimatedBlogCardProps {

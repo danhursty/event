@@ -6,7 +6,7 @@ import { getMemberRoles } from "./get-member-roles";
 describe("getMemberRoles", () => {
   it("should fetch roles for a user in an organization", async () => {
     // Create test data
-    const { user, token } = await createTestUser({});
+    const { user, token } = await createTestUser();
 
     // Create organization (this will automatically create the user as an admin member)
     const { organization, team } = await createTestOrganization({
@@ -48,7 +48,7 @@ describe("getMemberRoles", () => {
 
   it("should handle users with no memberships", async () => {
     // Create test user with no memberships
-    const { user, token } = await createTestUser({});
+    const { user, token } = await createTestUser();
     const supabase = createAuthenticatedClient(token);
 
     // Fetch member roles
@@ -64,7 +64,7 @@ describe("getMemberRoles", () => {
 
   it("should fetch roles for a user in multiple organizations", async () => {
     // Create test data
-    const { user, token } = await createTestUser({});
+    const { user, token } = await createTestUser();
 
     // Create first organization (user will be admin)
     const { organization: org1, team: team1 } = await createTestOrganization({
@@ -126,8 +126,8 @@ describe("getMemberRoles", () => {
 
   it("should handle RLS policies correctly", async () => {
     // Create two users
-    const { user: user1, token: token1 } = await createTestUser({});
-    const { user: user2, token: token2 } = await createTestUser({});
+    const { user: user1, token: token1 } = await createTestUser();
+    const { user: user2, token: token2 } = await createTestUser();
 
     // Create organization with user1 as admin
     const { organization } = await createTestOrganization({
@@ -159,6 +159,7 @@ describe("getMemberRoles", () => {
       supabase: client2,
       userId: user1.id,
     });
+
     expect(result3.organizationMemberships).toHaveLength(0);
   });
 });

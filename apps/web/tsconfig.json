@@ -21,7 +21,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@repo/supabase": ["../../packages/supabase/src"],
+      "@repo/supabase/*": ["../../packages/supabase/src/*"]
     }
   },
   "include": [
@@ -31,8 +33,14 @@
     ".next/types/**/*.ts",
     "./framer-motion.d.ts",
     "./global.d.ts",
-    "../packages/supabase/src/**/*.ts"
+    "../../packages/supabase/src/**/*.ts",
+    "../../packages/supabase/src/**/*.tsx"
   ],
   "exclude": ["node_modules"],
-  "types": ["node"]
+  "types": ["node"],
+  "references": [
+    {
+      "path": "../../packages/supabase"
+    }
+  ]
 }

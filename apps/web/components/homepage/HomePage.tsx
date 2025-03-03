@@ -5,7 +5,6 @@ import USPSection from "./USPSection";
 import TestimonialSection from "./TestimonialSection";
 import FAQSection from "./FAQSection";
 import PainPointsSection from "./PaintPointsSection";
-// import { PlanSelector } from "../PlanSelector";
 import FeaturesSection from "./FeaturesSection";
 import { config } from "@/config";
 import CTASection from "./CTASection";

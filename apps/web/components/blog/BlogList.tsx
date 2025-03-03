@@ -1,6 +1,6 @@
 "use client";
 
-import { Tables } from "@/types/types";
+import { Tables } from "@repo/supabase";
 import AnimatedBlogCard from "./AnimatedBlogCard";
 
 interface BlogListProps {
