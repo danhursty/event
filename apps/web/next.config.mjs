@@ -48,4 +48,9 @@ export default withSentryConfig(nextConfig, {
   // https://docs.sentry.io/product/crons/
   // https://vercel.com/docs/cron-jobs
   automaticVercelMonitors: true,
+
+  // Add this section to address the warning about source maps
+  sourcemaps: {
+    deleteSourcemapsAfterUpload: true,
+  },
 });

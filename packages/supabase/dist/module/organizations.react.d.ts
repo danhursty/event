@@ -156,3 +156,4 @@ export declare function useDeleteOrganization({ supabase, options, }: {
     orgId: string;
 }>;
 export {};
+//# sourceMappingURL=organizations.react.d.ts.map

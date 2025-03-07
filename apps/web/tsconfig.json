@@ -37,10 +37,5 @@
     "../../packages/supabase/src/**/*.tsx"
   ],
   "exclude": ["node_modules"],
-  "types": ["node"],
-  "references": [
-    {
-      "path": "../../packages/supabase"
-    }
-  ]
+  "types": ["node"]
 }

@@ -139,3 +139,4 @@ export declare function deleteOrganization({ supabase, orgId, }: {
     supabase: SupabaseClient;
     orgId: string;
 }): Promise<void>;
+//# sourceMappingURL=organizations.d.ts.map

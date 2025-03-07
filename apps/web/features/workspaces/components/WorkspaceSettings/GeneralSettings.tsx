@@ -22,9 +22,16 @@ import { useRouter } from "next/navigation";
 interface GeneralSettingsProps {
   team: Team;
   onClose?: () => void;
+  currentMember?: any;
+  canManageWorkspace?: boolean;
 }
 
-export function GeneralSettings({ team, onClose }: GeneralSettingsProps) {
+export function GeneralSettings({
+  team,
+  onClose,
+  currentMember,
+  canManageWorkspace = false,
+}: GeneralSettingsProps) {
   const router = useRouter();
   const supabase = createClient();
   const { mutate: updateTeam, isPending } = useUpdateTeam({

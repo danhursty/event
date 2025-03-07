@@ -16,3 +16,4 @@ export declare abstract class SupabaseOperationError extends Error {
     readonly cause?: unknown | undefined;
     constructor(operation: string, message: string, toastMessage: string, errorCode: SupabaseErrorCode, cause?: unknown | undefined);
 }
+//# sourceMappingURL=errors.d.ts.map

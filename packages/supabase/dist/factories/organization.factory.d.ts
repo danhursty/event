@@ -31,3 +31,4 @@ export declare function createTestOrganization({ userId, name, onboardingRole, a
     };
 }>;
 export {};
+//# sourceMappingURL=organization.factory.d.ts.map

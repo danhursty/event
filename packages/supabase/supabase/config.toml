@@ -9,7 +9,7 @@
 
 # A string used to distinguish different Supabase projects on the same host. Defaults to the
 # working directory name when running `supabase init`.
-project_id = "cursordevkit_riseloop"
+project_id = "cursordevkit_octospark"
 
 [api]
 enabled = true

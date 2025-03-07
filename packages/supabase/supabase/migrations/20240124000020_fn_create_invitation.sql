@@ -78,26 +78,24 @@ $$;
 
 -- Create function to revoke invitation
 CREATE OR REPLACE FUNCTION public.revoke_invitation(
-    p_token TEXT
-)
-RETURNS BOOLEAN
-LANGUAGE plpgsql
-SECURITY DEFINER
-SET search_path = public
-AS $$
-BEGIN
-    UPDATE invitations
-    SET expires_at = now()
-    WHERE token = p_token
-      AND accepted_at IS NULL;
+         p_token TEXT
+     )
+     RETURNS BOOLEAN
+     LANGUAGE plpgsql
+     SECURITY DEFINER
+     AS $$
+     BEGIN
+         DELETE FROM invitations
+         WHERE token = p_token
+           AND accepted_at IS NULL;
 
-    IF NOT FOUND THEN
-        RETURN FALSE;
-    END IF;
+         IF NOT FOUND THEN
+             RETURN FALSE;
+         END IF;
 
-    RETURN TRUE;
-END;
-$$;
+         RETURN TRUE;
+     END;
+     $$;
 
 -- Create function to process invitation
 CREATE OR REPLACE FUNCTION process_invitation(

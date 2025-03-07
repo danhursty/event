@@ -92,7 +92,7 @@ export default function USPSection({ usps }: USPProps) {
             <Trophy className="h-6 w-6 text-primary" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Why Choose RiseLoop?
+            Why Choose OctoSpark?
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
             The most complete solution for managing social media content and

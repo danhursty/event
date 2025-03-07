@@ -579,13 +579,10 @@ export function OnboardingForm({ user }: OnboardingFormProps) {
               type="button"
               onClick={async () => {
                 const isValid = await form.trigger();
-                console.log("Form validation result:", isValid);
                 if (isValid) {
                   const formValues = form.getValues();
-                  console.log("Form values:", formValues);
                   await onSubmit(formValues);
                 } else {
-                  console.log("Form validation errors:", form.formState.errors);
                   toast.error(
                     "Please ensure all required fields are filled correctly"
                   );

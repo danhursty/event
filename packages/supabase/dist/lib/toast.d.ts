@@ -8,3 +8,4 @@ export declare const moduleToast: {
     error: (message: string, options?: ToastOptions) => string;
 };
 export {};
+//# sourceMappingURL=toast.d.ts.map

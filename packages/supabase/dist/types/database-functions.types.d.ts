@@ -45,3 +45,4 @@ export type DatabaseFunctions = {
     };
 };
 export {};
+//# sourceMappingURL=database-functions.types.d.ts.map

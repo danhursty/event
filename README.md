@@ -1,4 +1,4 @@
-# 🧙‍♂️ RiseLoop - Modern SaaS Boilerplate
+# OctoSpark - Modern SaaS Boilerplate
 
 A powerful, type-safe SaaS boilerplate built with Next.js 15, React, TypeScript, and Supabase. This monorepo is structured using Turborepo and PNPM for optimal development experience and performance.
 
@@ -51,7 +51,7 @@ Useful commands:
 
 ```bash
 git clone <repository-url>
-cd riseloop
+cd OctoSpark
 pnpm install
 ```
 

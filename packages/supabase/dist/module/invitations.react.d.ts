@@ -14,16 +14,7 @@ interface InviteMemberParams {
     organizationName: string;
     inviterName: string;
 }
-type InviteOrgMemberResponse = {
-    token: string;
-    id: string;
-    email: string;
-    organization_id: string;
-    role_id: string;
-    role_name: string;
-    membership_type: MembershipType;
-    expires_at: string;
-};
+type InviteOrgMemberResponse = string;
 type QueryKey = readonly [string, ...unknown[]];
 /**
  * React Query key factory for invitation-related queries
@@ -67,7 +58,7 @@ export declare class InvitationOperationError extends SupabaseOperationError {
  * @returns Mutation result with status and handlers
  */
 export declare function useInviteMember({ supabase, options, }: {
-    supabase: SupabaseClient;
+    supabase: SupabaseClient<Database>;
     options?: Partial<UseMutationOptions<InviteOrgMemberResponse, Error, InviteMemberParams>>;
 }): UseMutationResult<InviteOrgMemberResponse, Error, InviteMemberParams>;
 /**
@@ -126,3 +117,4 @@ export declare function useRevokeInvitation({ supabase, options, }: {
     teamId: string;
 }>;
 export {};
+//# sourceMappingURL=invitations.react.d.ts.map

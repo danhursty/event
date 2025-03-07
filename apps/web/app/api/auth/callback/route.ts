@@ -17,16 +17,32 @@ export async function GET(request: Request) {
   try {
     // Handle both PKCE and magic link flows
     if (code) {
-      await supabase.auth.exchangeCodeForSession(code);
+      const { error: exchangeError } =
+        await supabase.auth.exchangeCodeForSession(code);
+      if (exchangeError) {
+        console.error("Error exchanging code for session:", exchangeError);
+        throw exchangeError;
+      }
     } else if (type === "magiclink" && tokenHash) {
-      await supabase.auth.verifyOtp({
+      const { error: otpError } = await supabase.auth.verifyOtp({
         token_hash: tokenHash,
-        type: "magiclink",
+        type: "email",
       });
+      if (otpError) {
+        console.error("Error verifying OTP:", otpError);
+        throw otpError;
+      }
     }
 
-    const userResponse = await supabase.auth.getUser();
-    user = userResponse.data.user;
+    const {
+      data: { user: authUser },
+      error: userError,
+    } = await supabase.auth.getUser();
+    if (userError) {
+      console.error("Error getting user:", userError);
+      throw userError;
+    }
+    user = authUser;
 
     if (!user || !user.email) {
       console.error("No user or email found after auth flow");

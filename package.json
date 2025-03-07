@@ -1,5 +1,5 @@
 {
-  "name": "riseloop-monorepo",
+  "name": "OctoSpark-monorepo",
   "version": "1.0.0",
   "private": true,
   "workspaces": [
@@ -54,5 +54,8 @@
     "node": ">=20"
   },
   "type": "module",
-  "packageManager": "pnpm@10.3.0"
+  "packageManager": "pnpm@10.3.0",
+  "dependencies": {
+    "next": "15.1.4"
+  }
 }

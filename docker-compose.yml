@@ -48,4 +48,4 @@ volumes:
 networks:
   supabase_network:
     external: true
-    name: supabase_network_cursordevkit_riseloop
+    name: supabase_network_cursordevkit_octospark

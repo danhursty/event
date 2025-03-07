@@ -133,3 +133,4 @@ export declare function deleteTeamMember({ supabase, memberId, }: {
     supabase: SupabaseClient;
     memberId: string;
 }): Promise<void>;
+//# sourceMappingURL=team-members.d.ts.map

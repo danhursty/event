@@ -36,3 +36,4 @@ export declare const roleQueryKeys: {
     readonly all: readonly ["roles"];
     readonly lists: readonly ["roles", "list"];
 };
+//# sourceMappingURL=roles.d.ts.map

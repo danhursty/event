@@ -67,11 +67,6 @@ export function WorkspaceCard({
     requiredPermissions: ["manage_organization" as Permission],
   });
 
-  // Add debugging for settings button visibility
-  console.log("Team name:", team.name);
-  console.log("Can manage workspace:", canManageWorkspace);
-  console.log("Current member permissions:", currentMember?.role?.permissions);
-
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this workspace?")) {
       deleteTeam(

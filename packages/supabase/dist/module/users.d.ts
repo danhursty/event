@@ -117,3 +117,4 @@ export declare function deleteUser({ supabase, userId, }: {
     supabase: SupabaseClient;
     userId: string;
 }): Promise<void>;
+//# sourceMappingURL=users.d.ts.map

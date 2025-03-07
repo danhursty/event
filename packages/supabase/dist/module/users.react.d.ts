@@ -165,3 +165,4 @@ export declare function useDeleteUser({ supabase, options, }: {
     userId: string;
 }>;
 export {};
+//# sourceMappingURL=users.react.d.ts.map

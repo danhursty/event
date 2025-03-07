@@ -30,7 +30,7 @@ export default function TestimonialSection({ testimonials }: TestimonialProps) {
             Loved by Social Media Teams
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            See what our customers have to say about RiseLoop
+            See what our customers have to say about OctoSpark
           </p>
         </div>
 
@@ -84,8 +84,8 @@ export default function TestimonialSection({ testimonials }: TestimonialProps) {
         <div className="mt-16 text-center">
           <div className="flex flex-col items-center">
             <p className="text-gray-600 dark:text-gray-300 mb-5 max-w-xl mx-auto">
-              Join hundreds of social media teams who are already using RiseLoop
-              to streamline their workflow
+              Join hundreds of social media teams who are already using
+              OctoSpark to streamline their workflow
             </p>
             <Button
               onClick={() => router.push("/login")}

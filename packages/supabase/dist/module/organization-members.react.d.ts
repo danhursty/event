@@ -196,3 +196,4 @@ export declare function useDeleteOrganizationMember({ supabase, options, }: {
     organizationId: string;
 }>;
 export {};
+//# sourceMappingURL=organization-members.react.d.ts.map

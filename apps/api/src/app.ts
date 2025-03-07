@@ -21,9 +21,9 @@ if (process.env.NODE_ENV !== "production") {
   app.doc("/api-docs", {
     openapi: "3.0.0",
     info: {
-      title: "RiseLoop API",
+      title: "OctoSpark API",
       version: "1.0.0",
-      description: "API documentation for RiseLoop",
+      description: "API documentation for OctoSpark",
     },
   });
 
@@ -32,5 +32,16 @@ if (process.env.NODE_ENV !== "production") {
 
 // Mount routes
 app.route("/health", healthRoutes);
+
+// Add root route handler
+app.get("/", (c) => {
+  if (process.env.NODE_ENV !== "production") {
+    // In development, redirect to Swagger UI
+    return c.redirect("/swagger");
+  } else {
+    // In production, redirect to health endpoint
+    return c.redirect("/health");
+  }
+});
 
 export { app };

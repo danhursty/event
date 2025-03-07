@@ -6,3 +6,4 @@ export type SupabaseProps = {
 export type QueryEnabledProps = {
     enabled?: boolean;
 };
+//# sourceMappingURL=react-query.d.ts.map

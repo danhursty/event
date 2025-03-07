@@ -11,3 +11,4 @@ export declare function createTestRoles(): Promise<{
         id: string;
     };
 }>;
+//# sourceMappingURL=role.factory.d.ts.map

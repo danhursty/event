@@ -649,3 +649,4 @@ export type CompositeTypes<PublicCompositeTypeNameOrOptions extends keyof Public
     schema: keyof Database;
 } ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName] : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"] ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions] : never;
 export {};
+//# sourceMappingURL=database.types.d.ts.map

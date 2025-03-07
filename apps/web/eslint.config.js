@@ -15,6 +15,7 @@ const config = {
     "@tanstack/query/prefer-query-object-syntax": "error",
     "@tanstack/query/stable-query-client": "error",
   },
+  ignores: ["components/ui/**", "components/ui/**/**"],
 };
 
 export default config;

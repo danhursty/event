@@ -9,3 +9,4 @@ export type OnboardingData = {
     role_type: OrganizationRoleType;
     referral_source: OrganizationReferralSource;
 };
+//# sourceMappingURL=types.d.ts.map

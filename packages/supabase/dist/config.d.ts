@@ -5,3 +5,4 @@ export declare const ENV: {
     readonly SUPABASE_ANON_KEY: string;
     readonly SUPABASE_SERVICE_ROLE_KEY: string;
 };
+//# sourceMappingURL=config.d.ts.map

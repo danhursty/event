@@ -23,15 +23,15 @@ interface DashboardConfig {
 }
 
 export const config: AppConfig = {
-  name: "RiseLoop",
-  domainName: "riseloop.ai",
+  name: "OctoSpark",
+  domainName: "OctoSpark.ai",
   appDescription:
     "Transform social media management with AI-powered inbox and intelligent video content strategies",
   company: {
-    name: "RiseLoop",
+    name: "OctoSpark",
     address: "",
     phone: "",
-    supportEmail: "support@riseloop.ai",
+    supportEmail: "support@OctoSpark.ai",
   },
   indieMaker: {
     name: "James Phoenix",
@@ -179,7 +179,7 @@ export const config: AppConfig = {
         name: "Sarah Johnson",
         company: "Social Media Manager",
         quote:
-          "RiseLoop's AI comment management has transformed our workflow. We're responding faster and maintaining better relationships with our audience.",
+          "OctoSpark's AI comment management has transformed our workflow. We're responding faster and maintaining better relationships with our audience.",
       },
       {
         imageId: 2,
@@ -193,12 +193,12 @@ export const config: AppConfig = {
         name: "Emily Rodriguez",
         company: "Tech Startup",
         quote:
-          "Managing multiple social accounts was a nightmare before RiseLoop. Now our entire team stays on the same page with the unified inbox.",
+          "Managing multiple social accounts was a nightmare before OctoSpark. Now our entire team stays on the same page with the unified inbox.",
       },
     ],
     faqs: [
       {
-        question: "How does RiseLoop's AI comment management work?",
+        question: "How does OctoSpark's AI comment management work?",
         answer:
           "Our AI analyzes incoming comments across your social platforms, categorizes them by sentiment and intent, and can automatically respond to routine inquiries while flagging important ones for your attention. You can customize response templates and train the AI on your brand voice.",
       },
@@ -247,7 +247,7 @@ export const config: AppConfig = {
     },
   },
   blog: {
-    title: "RiseLoop Blog",
+    title: "OctoSpark Blog",
     description:
       "Tips, strategies, and insights for social media growth and automation.",
   },
@@ -259,25 +259,25 @@ export const config: AppConfig = {
         icon: Server,
       },
       {
-        title: "Social Inbox",
-        href: "[teamId]/inbox",
-        icon: Inbox,
-      },
-      {
-        title: "Video Analysis",
-        href: "[teamId]/video-analysis",
+        title: "Video Content Strategy",
+        href: "[teamId]/content-strategy",
         icon: BarChart,
       },
-      {
-        title: "Social Accounts",
-        href: "[teamId]/social-accounts",
-        icon: Users,
-      },
-      {
-        title: "Settings",
-        href: "[teamId]/settings",
-        icon: Home,
-      },
+      // {
+      //   title: "Social Inbox",
+      //   href: "[teamId]/inbox",
+      //   icon: Inbox,
+      // },
+      // {
+      //   title: "Social Accounts",
+      //   href: "[teamId]/social-accounts",
+      //   icon: Users,
+      // },
+      // {
+      //   title: "Settings",
+      //   href: "[teamId]/settings",
+      //   icon: Home,
+      // },
     ],
   },
   supabase: {

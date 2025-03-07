@@ -20,6 +20,10 @@ We have several files that are powering our RLS + integration tests.
 Database types:
 [database-functions.types.ts](mdc:packages/supabase/src/types/database-functions.types.ts)
 
+Always use tanstack query and never useEffect, you must use vittest and not jest.
+
+If you are using tanstack queries, assume that the toast notification has already been included for that hook and don't add an extra onSuccess or onError toast message. You can still include custom logic that will be execued on them though (after the hook has run).
+
 We have factories that are in the [index.ts](mdc:packages/supabase/src/factories/index.ts), i.e. [member.factory.ts](mdc:packages/supabase/src/factories/member.factory.ts) or [role.factory.ts](mdc:packages/supabase/src/factories/role.factory.ts) or [user.factory.ts](mdc:packages/supabase/src/factories/user.factory.ts)
 You can create new factories, if they are missing.
 One recommendation is to try using the module folder first CRUD rather than replicating that CRUD, the only reason why we did this for organisations and org_members and team_members is because we had a custom sign up. But just assume you can re-use the CRUD.

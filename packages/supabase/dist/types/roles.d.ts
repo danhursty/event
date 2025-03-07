@@ -34,3 +34,4 @@ export type RoleBasedProps = {
     currentMember: OrganizationMember | TeamMember;
     showIfUnauthorized?: boolean;
 };
+//# sourceMappingURL=roles.d.ts.map

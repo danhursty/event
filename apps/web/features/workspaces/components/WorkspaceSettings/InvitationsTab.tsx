@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import {
   Team,
   MembershipType,
@@ -22,14 +22,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useQueryClient } from "@tanstack/react-query";
+import { Loader2, Mail, Send, User2, UserCircle, UserPlus } from "lucide-react";
 
 interface InvitationsTabProps {
   team: Team;
-  currentMember: any; // Replace with proper type
+  onInvitationSent?: () => void;
+  currentMember?: any; // Replace with proper type
 }
 
-export function InvitationsTab({ team, currentMember }: InvitationsTabProps) {
+export function InvitationsTab({
+  team,
+  onInvitationSent,
+  currentMember,
+}: InvitationsTabProps) {
   const supabase = createClient();
+  const queryClient = useQueryClient();
   const [email, setEmail] = useState("");
   const [membershipType, setMembershipType] = useState<MembershipType>("team");
   const [roleType, setRoleType] = useState<RoleData["name"]>("member");
@@ -60,15 +75,15 @@ export function InvitationsTab({ team, currentMember }: InvitationsTabProps) {
 
   if (!canManageInvites) {
     return (
-      <div className="text-center py-4 text-muted-foreground">
-        You don't have permission to manage invitations
+      <div className="text-center py-8 text-muted-foreground space-y-2">
+        <UserCircle className="mx-auto h-12 w-12 text-muted-foreground/50" />
+        <p>You don't have permission to manage invitations</p>
       </div>
     );
   }
 
   const handleInvite = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("handleInvite called");
 
     try {
       const response = await supabase.auth.getUser();
@@ -117,6 +132,17 @@ export function InvitationsTab({ team, currentMember }: InvitationsTabProps) {
         {
           onSuccess: () => {
             setEmail("");
+
+            // Invalidate queries to refresh any affected components
+            queryClient.invalidateQueries({ queryKey: ["invitations"] });
+
+            // Call the callback to switch to pending tab
+            if (onInvitationSent) {
+              onInvitationSent();
+            }
+          },
+          onError: (error) => {
+            toast.error(`Failed to invite member: ${error.message}`);
           },
         }
       );
@@ -128,96 +154,144 @@ export function InvitationsTab({ team, currentMember }: InvitationsTabProps) {
 
   return (
     <div className="space-y-6 py-4">
-      <form role="form" onSubmit={handleInvite} className="space-y-4">
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email Address</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="Enter email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={isLoadingRoles || isInviting}
-            />
-          </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <UserPlus className="h-5 w-5 mr-2" />
+            Invite New Member
+          </CardTitle>
+          <CardDescription>
+            Send an invitation to join this workspace
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form role="form" onSubmit={handleInvite} className="space-y-4">
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="email" className="flex items-center">
+                  <Mail className="h-4 w-4 mr-1" />
+                  Email Address
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={isLoadingRoles || isInviting}
+                  className="focus:ring-2 focus:ring-primary focus:ring-offset-1"
+                />
+              </div>
 
-          <div className="grid gap-2">
-            <Label>Membership Type</Label>
-            <Select
-              value={membershipType}
-              onValueChange={(value: MembershipType) =>
-                setMembershipType(value)
-              }
-              disabled={
-                isLoadingRoles ||
-                isInviting ||
-                (isClientAdmin && membershipType === "team")
-              }
-            >
-              <SelectTrigger aria-label="Membership Type">
-                <SelectValue placeholder="Select membership type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem
-                  value="team"
-                  disabled={isClientAdmin}
-                  data-radix-select-item
-                >
-                  Team
-                </SelectItem>
-                <SelectItem value="client" data-radix-select-item>
-                  Client
-                </SelectItem>
-              </SelectContent>
-            </Select>
-            <p className="text-sm text-muted-foreground">
-              {membershipType === "team"
-                ? "Team members have access to all workspaces in the organization"
-                : "Clients are limited to this workspace only"}
-            </p>
-            {isClientAdmin && (
-              <p className="text-sm text-red-500">
-                As a client administrator, you can only invite users to client
-                organizations
-              </p>
-            )}
-          </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <Label className="flex items-center">
+                    <User2 className="h-4 w-4 mr-1" />
+                    Membership Type
+                  </Label>
+                  <Select
+                    value={membershipType}
+                    onValueChange={(value: MembershipType) =>
+                      setMembershipType(value)
+                    }
+                    disabled={
+                      isLoadingRoles ||
+                      isInviting ||
+                      (isClientAdmin && membershipType === "team")
+                    }
+                  >
+                    <SelectTrigger aria-label="Membership Type">
+                      <SelectValue placeholder="Select membership type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem
+                        value="team"
+                        disabled={isClientAdmin}
+                        data-radix-select-item
+                      >
+                        Team
+                      </SelectItem>
+                      <SelectItem value="client" data-radix-select-item>
+                        Client
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-xs text-muted-foreground">
+                    {membershipType === "team"
+                      ? "Team members have access to all workspaces in the organization"
+                      : "Clients are limited to this workspace only"}
+                  </p>
+                </div>
 
-          <div className="grid gap-2">
-            <Label>Role Type</Label>
-            <Select
-              value={roleType}
-              onValueChange={(value: RoleData["name"]) => setRoleType(value)}
-              disabled={isLoadingRoles || isInviting}
-            >
-              <SelectTrigger aria-label="Role Type">
-                <SelectValue placeholder="Select role type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="admin" data-radix-select-item>
-                  Admin
-                </SelectItem>
-                <SelectItem value="member" data-radix-select-item>
-                  Member
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+                <div className="grid gap-2">
+                  <Label className="flex items-center">
+                    <UserCircle className="h-4 w-4 mr-1" />
+                    Role Type
+                  </Label>
+                  <Select
+                    value={roleType}
+                    onValueChange={(value: RoleData["name"]) =>
+                      setRoleType(value)
+                    }
+                    disabled={isLoadingRoles || isInviting}
+                  >
+                    <SelectTrigger aria-label="Role Type">
+                      <SelectValue placeholder="Select role type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="admin" data-radix-select-item>
+                        Admin
+                      </SelectItem>
+                      <SelectItem value="member" data-radix-select-item>
+                        Member
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-xs text-muted-foreground">
+                    {roleType === "admin"
+                      ? "Admins can manage all aspects of the workspace"
+                      : "Members have limited permissions based on their role"}
+                  </p>
+                </div>
+              </div>
 
-          <Button
-            type="submit"
-            disabled={
-              isLoadingRoles ||
-              isInviting ||
-              (isClientAdmin && membershipType === "team")
-            }
-          >
-            {isInviting ? "Sending..." : "Send Invite"}
-          </Button>
+              <Button
+                type="submit"
+                disabled={
+                  isLoadingRoles ||
+                  isInviting ||
+                  (isClientAdmin && membershipType === "team") ||
+                  !email
+                }
+                className="mt-4 w-full md:w-auto md:self-end"
+              >
+                {isInviting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Invite
+                  </>
+                )}
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+
+      {isClientAdmin && (
+        <div className="bg-amber-50 border border-amber-200 p-4 rounded-md text-amber-800 text-sm mt-4">
+          <p className="font-medium">Client Administrator Restrictions</p>
+          <p className="mt-1">
+            As a client administrator, you can only invite users to client
+            organizations. Team membership is restricted.
+          </p>
         </div>
-      </form>
+      )}
     </div>
   );
 }

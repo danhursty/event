@@ -1,5 +1,5 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "files": [],
-  "references": [{ "path": "apps/web" }, { "path": "packages/supabase" }]
+  "references": []
 }

@@ -174,3 +174,4 @@ export declare function useDeleteTeam({ supabase, options, }: {
     teamId: string;
 }>;
 export {};
+//# sourceMappingURL=teams.react.d.ts.map

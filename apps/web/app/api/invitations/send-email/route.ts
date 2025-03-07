@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     const signUpUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/join?token=${token}`;
 
     await resend.emails.send({
-      from: `${config.name} <onboarding@riseloop.com>`,
+      from: `${config.name} <onboarding@octospark.ai>`,
       to: email,
       subject: `You've been invited to join ${organizationName} on ${config.name}`,
       react: TeamInvitationEmail({

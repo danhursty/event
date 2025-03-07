@@ -27,16 +27,7 @@ interface InviteMemberParams {
   inviterName: string;
 }
 
-type InviteOrgMemberResponse = {
-  token: string;
-  id: string;
-  email: string;
-  organization_id: string;
-  role_id: string;
-  role_name: string;
-  membership_type: MembershipType;
-  expires_at: string;
-};
+type InviteOrgMemberResponse = string;
 
 type QueryKey = readonly [string, ...unknown[]];
 
@@ -96,7 +87,7 @@ export function useInviteMember({
   supabase,
   options = {},
 }: {
-  supabase: SupabaseClient;
+  supabase: SupabaseClient<Database>;
   options?: Partial<
     UseMutationOptions<InviteOrgMemberResponse, Error, InviteMemberParams>
   >;
@@ -147,13 +138,11 @@ export function useInviteMember({
             p_expires_at: new Date(
               Date.now() + 7 * 24 * 60 * 60 * 1000
             ).toISOString(), // 7 days from now
-            p_team_id: teamId,
+            p_team_id: teamId ?? undefined,
           }
         );
 
         if (error) throw error;
-
-        const typedInvitationData = invitationData as InviteOrgMemberResponse;
 
         // Send invitation email via API route
         const response = await fetch("/api/invitations/send-email", {
@@ -163,7 +152,7 @@ export function useInviteMember({
           },
           body: JSON.stringify({
             email,
-            token: typedInvitationData.token,
+            token: invitationData,
             organizationName,
             inviterName,
             membershipType,
@@ -178,8 +167,7 @@ export function useInviteMember({
             SupabaseErrorCode.CREATE_FAILED
           );
         }
-
-        return typedInvitationData;
+        return invitationData;
       } catch (error) {
         if (error instanceof InvitationOperationError) {
           throw error;

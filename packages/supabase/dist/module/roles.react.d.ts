@@ -27,3 +27,4 @@ export declare function useRoles({ supabase, options, }: {
     options?: Partial<UseQueryOptions<RoleData[], RoleOperationError>>;
 }): import("@tanstack/react-query").UseQueryResult<RoleData[], RoleOperationError>;
 export type { RoleData };
+//# sourceMappingURL=roles.react.d.ts.map

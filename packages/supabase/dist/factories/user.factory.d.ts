@@ -52,3 +52,4 @@ export declare function loginTestUsers({ users, }: {
         password?: string;
     }>;
 }): Promise<string[]>;
+//# sourceMappingURL=user.factory.d.ts.map

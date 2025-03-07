@@ -68,11 +68,10 @@ export function useInviteMember({ supabase, options = {}, }) {
                     p_role_id: roleId,
                     p_invited_by: invitedBy,
                     p_expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days from now
-                    p_team_id: teamId,
+                    p_team_id: teamId ?? undefined,
                 });
                 if (error)
                     throw error;
-                const typedInvitationData = invitationData;
                 // Send invitation email via API route
                 const response = await fetch("/api/invitations/send-email", {
                     method: "POST",
@@ -81,7 +80,7 @@ export function useInviteMember({ supabase, options = {}, }) {
                     },
                     body: JSON.stringify({
                         email,
-                        token: typedInvitationData.token,
+                        token: invitationData,
                         organizationName,
                         inviterName,
                         membershipType,
@@ -90,7 +89,7 @@ export function useInviteMember({ supabase, options = {}, }) {
                 if (!response.ok) {
                     throw new InvitationOperationError("Invite Member", "Failed to send invitation email", "Failed to send invitation email. Please try again.", SupabaseErrorCode.CREATE_FAILED);
                 }
-                return typedInvitationData;
+                return invitationData;
             }
             catch (error) {
                 if (error instanceof InvitationOperationError) {
