@@ -1,26 +1,37 @@
-import LoginForm from "@/components/LoginForm";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import { config } from "@/config";
+"use client";
+
+import LoginForm from "@/components/auth/LoginForm";
+import RegisterForm from "@/components/auth/RegisterForm";
+import { AuthLayout } from "@/components/auth/AuthLayout";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
 
 export default function LoginPage() {
+  const [activeTab, setActiveTab] = useState("login");
+
+  const titles = {
+    login: {
+      title: "Sign in to your account",
+      subTitle: "Welcome back! Enter your credentials to access your account",
+    },
+    register: {
+      title: "Create a new account",
+      subTitle: "Join us today and get access to all our features",
+    },
+  };
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background">
-      <div className="w-full max-w-md space-y-8 px-4">
-        <div className="flex items-center justify-between">
-          <Link href={"/"}>
-            <Button variant="ghost" className="flex items-center gap-2 p-0">
-              <ArrowLeft className="h-4 w-4" />
-              Back
-            </Button>
-          </Link>
-          <h2 className="text-2xl font-bold tracking-tight text-foreground">
-            {config.name}
-          </h2>
-        </div>
-        <LoginForm />
-      </div>
-    </div>
+    <AuthLayout
+      title={titles[activeTab as keyof typeof titles].title}
+      subTitle={titles[activeTab as keyof typeof titles].subTitle}
+    >
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-2 mb-6">
+          <TabsTrigger value="login">Sign In</TabsTrigger>
+          <TabsTrigger value="register">Create Account</TabsTrigger>
+        </TabsList>
+        {activeTab === "login" ? <LoginForm /> : <RegisterForm />}
+      </Tabs>
+    </AuthLayout>
   );
 }

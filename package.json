@@ -54,8 +54,8 @@
     "node": ">=20"
   },
   "type": "module",
-  "packageManager": "pnpm@10.3.0",
+  "packageManager": "pnpm@10.6.4",
   "dependencies": {
-    "next": "15.1.4"
+    "next": "15.2.3"
   }
 }

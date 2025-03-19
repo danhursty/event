@@ -56,7 +56,7 @@
     "db:seed": "psql \"$(supabase db get-connection-string)\" -f ./supabase/seed.sql",
     "db:setup": "pnpm run db:start && pnpm run db:generate-types",
     "db:start": "supabase start",
-    "db:stop": "supabase stop",
+    "db:stop": "supabase stop && docker kill $(docker ps -aq)",
     "dev": "pnpm run build:watch",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",

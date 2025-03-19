@@ -1,14 +1,14 @@
 import { serve } from "@hono/node-server";
 import { app } from "./app";
 import * as Sentry from "@sentry/node";
-import { ProfilingIntegration } from "@sentry/profiling-node";
+import { nodeProfilingIntegration } from "@sentry/profiling-node";
 
 // Initialize Sentry
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
-  integrations: [new ProfilingIntegration()],
+  integrations: [],
   tracesSampleRate: 1.0,
-  profilesSampleRate: 1.0,
+  profilesSampleRate: 0.0,
 });
 
 const port = process.env.PORT || 3001;

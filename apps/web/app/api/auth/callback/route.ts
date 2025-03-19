@@ -15,6 +15,11 @@ export async function GET(request: Request) {
   let user: null | User = null;
 
   try {
+    // Handle password reset flow
+    if (type === "recovery") {
+      return NextResponse.redirect(new URL("/reset-password", request.url));
+    }
+
     // Handle both PKCE and magic link flows
     if (code) {
       const { error: exchangeError } =

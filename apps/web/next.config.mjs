@@ -13,6 +13,34 @@ const nextConfig = {
     "@repo/supabase", // add your local library here
   ],
   reactStrictMode: false,
+  experimental: {
+    turbo: {
+      // Configure Turbopack
+      resolveAlias: {
+        // Add any necessary aliases that might be in webpack config
+      },
+      resolveExtensions: [
+        ".tsx",
+        ".ts",
+        ".jsx",
+        ".js",
+        ".json",
+        ".css",
+        ".scss",
+        ".sass",
+        ".mdx",
+        ".mjs",
+      ],
+      // If there are any webpack loaders that need to be configured for Turbopack
+      rules: {
+        // Example: SVG handling if needed
+        // '*.svg': {
+        //   loaders: ['@svgr/webpack'],
+        //   as: '*.js',
+        // },
+      },
+    },
+  },
 };
 
 export default withSentryConfig(nextConfig, {
