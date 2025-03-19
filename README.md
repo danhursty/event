@@ -1,5 +1,22 @@
 # OctoSpark - Modern SaaS Boilerplate
 
+## Prerequisites
+
+Before starting development, ensure you have the following tools installed:
+
+- **Node.js** (v18+): [Download & Install Node.js](https://nodejs.org/en/download/)
+- **npm** (comes with Node.js): [npm Documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- **pnpm** (package manager): [Installation Guide](https://pnpm.io/installation)
+  ```bash
+  npm install -g pnpm
+  ```
+- **Docker** (for Supabase local development): [Get Docker](https://docs.docker.com/get-docker/)
+- **Docker Compose** (usually included with Docker Desktop): [Install Docker Compose](https://docs.docker.com/compose/install/)
+- **Supabase CLI**: [Supabase CLI Installation](https://supabase.com/docs/guides/cli)
+  ```bash
+  npm install -g supabase
+  ```
+
 A powerful, type-safe SaaS boilerplate built with Next.js 15, React, TypeScript, and Supabase. This monorepo is structured using Turborepo and PNPM for optimal development experience and performance.
 
 Useful commands:
