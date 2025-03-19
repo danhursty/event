@@ -24,52 +24,6 @@ Useful commands:
 - `git ls-files | xargs wc -l` - This is particularly useful when you want to get a quick overview of the size of your codebase in terms of lines of code.
 - `npx claude` - This is useful for Claude code as a CLI code generation tool.
 
-## Feature Context for Octospark
-
-### Feature 1: Social Media Comment Management System
-
-This feature creates a unified inbox for managing comments across multiple social platforms with AI assistance. It's designed for social media managers, agencies, and brands who need to efficiently handle high volumes of engagement.
-
-**Key components:**
-
-- Social account integration (Meta, TikTok, etc.)
-- Unified comment inbox with filtering capabilities
-- AI-powered comment categorization and response suggestions
-- Status management workflow (open, replied, resolved)
-- Linear-style keyboard shortcuts for power users
-- Command palette for advanced actions
-
-**Primary value:** Daily operational efficiency for social media managers, allowing them to handle more accounts with less time while maintaining quality engagement.
-
-### Feature 2: Content Strategy & Analytics
-
-This feature analyzes social media content performance and provides strategic recommendations to improve engagement and reach.
-
-**Key components:**
-
-- Content performance analytics across platforms
-- AI-generated content recommendations based on historical data
-- Competitor analysis capabilities
-- Content calendar planning based on insights
-- Trend identification and opportunity alerts
-
-**Primary value:** Strategic insights for pitching clients, planning content, and demonstrating ROI. This feature helps social media professionals make data-driven decisions and justify their strategies to clients/stakeholders.
-
-### Integration Points
-
-- Comments provide real-time feedback on content strategy effectiveness
-- Content insights inform better comment responses
-- Combined analytics show correlation between content types and engagement quality
-- Unified workflow from strategy to execution to measurement
-
-This dual-feature approach creates a complete workflow for social media professionals: strategic planning, daily execution, and performance measurement in one platform with exceptional UI/UX focused on productivity.
-
-## Inspiration:
-
-- https://github.com/alan2207/bulletproof-react
-- https://usebasejump.com/blog/testing-on-supabase-with-pgtap#testing-authenticated
-- https://github.com/dougwithseismic/turbo-2025/ (Doug is really great and knows his stuff).
-
 ## 🏗️ Project Structure
 
 ```bash
@@ -93,6 +47,12 @@ This dual-feature approach creates a complete workflow for social media professi
 │   ├── typescript-config/  # Shared TypeScript configurations
 │   └── eslint-config/     # Shared ESLint configurations
 ```
+
+## Inspiration:
+
+- https://github.com/alan2207/bulletproof-react
+- https://usebasejump.com/blog/testing-on-supabase-with-pgtap#testing-authenticated
+- https://github.com/dougwithseismic/turbo-2025/ (Doug is really great and knows his stuff).
 
 ## 🚀 Getting Started
 
