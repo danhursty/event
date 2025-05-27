@@ -31,19 +31,6 @@ export default async function OrgRedirectPage() {
 
   const organizationId = memberships[0].organization_id;
 
-  // Team membership check
-  const { data: teamMemberships } = await supabase
-    .from("team_members")
-    .select("team_id")
-    .order("created_at", { ascending: false })
-    .eq("user_id", user.id)
-    .limit(1);
-
-  // If no team memberships => go to /org/workspaces
-  if (!teamMemberships || teamMemberships.length === 0) {
-    redirect(`/org/${organizationId}/workspaces`);
-  }
-
-  const teamId = teamMemberships[0].team_id;
-  redirect(`/org/${organizationId}/${teamId}`);
+  // Redirect directly to the organization page
+  redirect(`/org/${organizationId}/`);
 }

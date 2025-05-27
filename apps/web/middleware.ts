@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 export async function middleware(request: NextRequest) {
   const response = await updateSession(request);
 
+  // Check if the user is authenticated
   const isProtectedRoute =
     request.nextUrl.pathname.startsWith("/org") ||
     request.nextUrl.pathname.startsWith("/workspaces");

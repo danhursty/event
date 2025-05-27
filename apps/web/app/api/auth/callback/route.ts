@@ -95,41 +95,9 @@ export async function GET(request: Request) {
       return NextResponse.redirect(new URL("/onboarding", request.url));
     }
 
-    // Get the user's team membership for this organization
-    const { data: teamMember, error: teamError } = await supabase
-      .from("team_members")
-      .select(
-        `
-        team_id,
-        teams!inner (
-          organization_id
-        )
-      `
-      )
-      .eq("user_id", user.id)
-      .eq("teams.organization_id", orgMember.organization_id as string)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .single();
-
-    if (teamError && teamError.code !== "PGRST116") {
-      console.error("Error fetching team membership:", teamError);
-      throw teamError;
-    }
-
-    // If we have both org and team membership
-    if (teamMember) {
-      return NextResponse.redirect(
-        new URL(
-          `/org/${orgMember.organization_id}/${teamMember.team_id}`,
-          request.url
-        )
-      );
-    }
-
-    // If we only have org membership but no team
+    // If we have organization membership, redirect to the org page
     return NextResponse.redirect(
-      new URL(`/org/${orgMember.organization_id}/workspaces`, request.url)
+      new URL(`/org/${orgMember.organization_id}/`, request.url)
     );
   } catch (error) {
     console.error("Error in auth callback:", error);

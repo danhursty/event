@@ -7,6 +7,8 @@ import {
   Home,
   Inbox,
   Users,
+  UserRound,
+  CalendarDays,
 } from "lucide-react";
 import { BillingMode } from "@/types/config";
 import { LucideIcon } from "lucide-react";
@@ -87,9 +89,9 @@ export const config: AppConfig = {
   },
   auth: {
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-    signInRedirectUrl: "/onboarding",
+    signInRedirectUrl: "/org",
     authCallbackUrl: "/api/auth/callback",
-    dashboardUrl: "/dashboard",
+    dashboardUrl: "/org",
     loginUrl: "/login",
   },
   homepage: {
@@ -260,24 +262,34 @@ export const config: AppConfig = {
       },
       {
         title: "Video Content Strategy",
-        href: "[teamId]/content-strategy",
+        href: "content-strategy",
         icon: BarChart,
       },
-      // {
-      //   title: "Social Inbox",
-      //   href: "[teamId]/inbox",
-      //   icon: Inbox,
-      // },
-      // {
-      //   title: "Social Accounts",
-      //   href: "[teamId]/social-accounts",
-      //   icon: Users,
-      // },
-      // {
-      //   title: "Settings",
-      //   href: "[teamId]/settings",
-      //   icon: Home,
-      // },
+      {
+        title: "Social Inbox",
+        href: "inbox",
+        icon: Inbox,
+      },
+      {
+        title: "Social Accounts",
+        href: "social-accounts",
+        icon: Users,
+      },
+      {
+        title: "Beneficiaries",
+        href: "beneficiaries",
+        icon: UserRound,
+      },
+      {
+        title: "Events",
+        href: "events",
+        icon: CalendarDays,
+      },
+      {
+        title: "Settings",
+        href: "settings",
+        icon: Home,
+      },
     ],
   },
   supabase: {

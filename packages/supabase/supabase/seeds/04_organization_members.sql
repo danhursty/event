@@ -5,6 +5,8 @@ Inserts organization membership info (linking users to organizations).
 
 /* Multi-Team Organization Members */
 INSERT INTO organization_members (organization_id, user_id, role_id, membership_type) VALUES
+    -- Default test user as admin
+    ('11111111-2222-3333-4444-555555555555', '12345678-1234-1234-1234-123456789012', (SELECT id FROM roles WHERE name = 'admin' LIMIT 1), 'team'),
     -- Commented out to ensure this user doesn't get added to a team (No Teams scenario):
     -- ('11111111-2222-3333-4444-555555555555', '11111111-1111-1111-1111-111111111111', (SELECT id FROM roles WHERE name = 'admin'), 'team'),
     -- New team admin user

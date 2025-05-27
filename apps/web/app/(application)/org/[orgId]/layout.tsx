@@ -25,9 +25,9 @@ export default async function DashboardLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ orgId: string; teamId: string }>;
+  params: Promise<{ orgId: string }>;
 }) {
-  const { orgId, teamId } = await params;
+  const { orgId } = await params;
   const supabase = await createClient();
   const queryClient = createQueryClient();
 
@@ -47,17 +47,6 @@ export default async function DashboardLayout({
 
   if (!orgMember) {
     redirect("/org"); // fallback redirect
-  }
-
-  const { data: teamMember } = await supabase
-    .from("team_members")
-    .select("team_id")
-    .eq("team_id", teamId)
-    .eq("user_id", user?.id!)
-    .single();
-
-  if (!teamMember) {
-    redirect(`/org/${orgId}/workspaces`); // fallback to the org-level redirect
   }
 
   // Prefetch any queries needed for child pages

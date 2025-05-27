@@ -64,7 +64,7 @@ Useful commands:
 
 ```bash
 git clone <repository-url>
-cd OctoSpark
+cd supabase-tdd-boilerplate
 pnpm install
 ```
 

@@ -73,9 +73,9 @@ describe("OrgRedirectPage", () => {
 
     // Act & Assert
     await expect(OrgRedirectPage()).rejects.toThrow(
-      `NEXT_REDIRECT:/org/${orgId}/workspaces`
+      `NEXT_REDIRECT:/org/${orgId}/`
     );
-    expect(mockRedirect).toHaveBeenCalledWith(`/org/${orgId}/workspaces`);
+    expect(mockRedirect).toHaveBeenCalledWith(`/org/${orgId}/`);
   });
 
   it("should redirect to team workspace if user has both org and team memberships", async () => {

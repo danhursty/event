@@ -61,6 +61,10 @@ WHERE team_id IN (
 
 /* Add explicit team memberships for new team admin user */
 INSERT INTO team_members (team_id, user_id, role_id) VALUES
+    -- Test user explicit memberships
+    ('44444444-5555-6666-7777-888888888888', '12345678-1234-1234-1234-123456789012', (SELECT id FROM roles WHERE name = 'admin' LIMIT 1)),
+    ('55555555-6666-7777-8888-999999999999', '12345678-1234-1234-1234-123456789012', (SELECT id FROM roles WHERE name = 'admin' LIMIT 1)),
+    ('66666666-7777-8888-9999-aaaaaaaaaaaa', '12345678-1234-1234-1234-123456789012', (SELECT id FROM roles WHERE name = 'admin' LIMIT 1)),
     -- Marketing Team admin role
     ('44444444-5555-6666-7777-888888888888', '30303030-3030-3030-3030-303030303030', (SELECT id FROM roles WHERE name = 'admin' LIMIT 1)),
     -- Design Team admin role

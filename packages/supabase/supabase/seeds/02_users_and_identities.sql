@@ -23,6 +23,26 @@ INSERT INTO auth.users (
     email_change_token_new,
     recovery_token
 ) VALUES
+    -- Default test user
+    (
+        '00000000-0000-0000-0000-000000000000',
+        '12345678-1234-1234-1234-123456789012',
+        'authenticated',
+        'authenticated',
+        'test@example.com',
+        crypt('password123', gen_salt('bf')),
+        current_timestamp,
+        current_timestamp,
+        current_timestamp,
+        '{"provider":"email","providers":["email"]}'::jsonb,
+        '{"sub": "12345678-1234-1234-1234-123456789012", "email": "test@example.com", "email_verified": true, "phone_verified": false}'::jsonb,
+        current_timestamp,
+        current_timestamp,
+        '',
+        '',
+        '',
+        ''
+    ),
     -- User for team admin with no teams
     (
         '00000000-0000-0000-0000-000000000000',

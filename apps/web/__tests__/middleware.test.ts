@@ -41,7 +41,7 @@ describe("middleware", () => {
     }
   );
 
-  test.each(["/org", "/workspaces"])(
+  test.each(["/org", "/"])(
     "redirects for protected routes on dashboard and onboarding",
     async (route) => {
       // Setup
